@@ -1,4 +1,3 @@
-  
 /**
  * To run this file in Gitpod, use the 
  * command node filter.js in the terminal
@@ -21,6 +20,12 @@ const people = [
   },
 ];
 
+const oldEnough = people.filter(person => person.age >= 21);
+console.log(oldEnough); // [ { name: 'Michael', age: 23} ]
+
+const justPaul = people.filter(person => person.name == "Paul");
+console.log(justPaul); // This will output an array with an object inside.
+console.log(justPaul[0]); // This will output just the object without the array.
 
 // Complex Filtering
 const students = [
@@ -55,3 +60,19 @@ const students = [
     ]
   },
 ];
+
+const strongSkills = student => {
+  let strongSkills = student.skills.filter(skill => skill.yrsExperience >= 5);
+  return strongSkills.length > 0;
+}
+
+const candidates = students.filter(strongSkills)
+
+console.log(candidates);
+
+// To reduce the code even more we can use:
+const has5YrsExp = skill => skill.yrsExperience >= 5;
+const strongSkills1 = student => student.skills.filter(has5YrsExp).length > 0;
+const candidates1 = students.filter(strongSkills1);
+const skilled = candidates1.map(candidate => candidate.name); // Using map to only select candidate's names.
+console.log(skilled);
